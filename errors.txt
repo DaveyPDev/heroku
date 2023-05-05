@@ -1,0 +1,5 @@
+pip uninstall psycopg2
+pip list --outdated
+pip install --upgrade wheel
+pip install --upgrade setuptools
+pip install psycopg2
