@@ -3,3 +3,124 @@ pip list --outdated
 pip install --upgrade wheel
 pip install --upgrade setuptools
 pip install psycopg2
+(you can ignore this. this was me getting past cffi and removing it. dont know what it was even for)
+
+here are my current logs 
+
+Application error
+An error occurred in the application and your page could not be served. If you are the application owner, check your logs for details. You can do this from the Heroku CLI with the command
+heroku logs --tail
+
+(venv) windie@Davids-MBP heroku % heroku logs --tail
+ ›   Warning: heroku update available from 7.68.2 to 8.1.3.
+2023-05-07T01:46:06.264135+00:00 app[web.1]: return _bootstrap._gcd_import(name[level:], package, level)
+2023-05-07T01:46:06.264136+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+2023-05-07T01:46:06.264136+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+2023-05-07T01:46:06.264136+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+2023-05-07T01:46:06.264137+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+2023-05-07T01:46:06.264137+00:00 app[web.1]: File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+2023-05-07T01:46:06.264137+00:00 app[web.1]: File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+2023-05-07T01:46:06.264138+00:00 app[web.1]: File "/app/app.py", line 17, in <module>
+2023-05-07T01:46:06.264138+00:00 app[web.1]: db.create_all()
+2023-05-07T01:46:06.264140+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/flask_sqlalchemy/__init__.py", line 963, in create_all
+2023-05-07T01:46:06.264140+00:00 app[web.1]: self._execute_for_all_tables(app, bind, 'create_all')
+2023-05-07T01:46:06.264141+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/flask_sqlalchemy/__init__.py", line 955, in _execute_for_all_tables
+2023-05-07T01:46:06.264141+00:00 app[web.1]: op(bind=self.get_engine(app, bind), **extra)
+2023-05-07T01:46:06.264141+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/sql/schema.py", line 4002, in create_all
+2023-05-07T01:46:06.264142+00:00 app[web.1]: bind._run_visitor(ddl.SchemaGenerator,
+2023-05-07T01:46:06.264142+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1939, in _run_visitor
+2023-05-07T01:46:06.264142+00:00 app[web.1]: with self._optional_conn_ctx_manager(connection) as conn:
+2023-05-07T01:46:06.264142+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/contextlib.py", line 119, in __enter__
+2023-05-07T01:46:06.264142+00:00 app[web.1]: return next(self.gen)
+2023-05-07T01:46:06.264143+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1932, in _optional_conn_ctx_manager
+2023-05-07T01:46:06.264143+00:00 app[web.1]: with self.contextual_connect() as conn:
+2023-05-07T01:46:06.264143+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2123, in contextual_connect
+2023-05-07T01:46:06.264143+00:00 app[web.1]: self._wrap_pool_connect(self.pool.connect, None),
+2023-05-07T01:46:06.264144+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2161, in _wrap_pool_connect
+2023-05-07T01:46:06.264144+00:00 app[web.1]: Connection._handle_dbapi_exception_noconnection(
+2023-05-07T01:46:06.264144+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 1474, in _handle_dbapi_exception_noconnection
+2023-05-07T01:46:06.264144+00:00 app[web.1]: util.raise_from_cause(
+2023-05-07T01:46:06.264145+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 265, in raise_from_cause
+2023-05-07T01:46:06.264145+00:00 app[web.1]: reraise(type(exception), exception, tb=exc_tb, cause=cause)
+2023-05-07T01:46:06.264145+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 248, in reraise
+2023-05-07T01:46:06.264145+00:00 app[web.1]: raise value.with_traceback(tb)
+2023-05-07T01:46:06.264145+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/base.py", line 2158, in _wrap_pool_connect
+2023-05-07T01:46:06.264146+00:00 app[web.1]: return fn()
+2023-05-07T01:46:06.264146+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 400, in connect
+2023-05-07T01:46:06.264146+00:00 app[web.1]: return _ConnectionFairy._checkout(self)
+2023-05-07T01:46:06.264146+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 788, in _checkout
+2023-05-07T01:46:06.264146+00:00 app[web.1]: fairy = _ConnectionRecord.checkout(pool)
+2023-05-07T01:46:06.264147+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 529, in checkout
+2023-05-07T01:46:06.264147+00:00 app[web.1]: rec = pool._do_get()
+2023-05-07T01:46:06.264147+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 1193, in _do_get
+2023-05-07T01:46:06.264147+00:00 app[web.1]: self._dec_overflow()
+2023-05-07T01:46:06.264147+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/util/langhelpers.py", line 66, in __exit__
+2023-05-07T01:46:06.264147+00:00 app[web.1]: compat.reraise(exc_type, exc_value, exc_tb)
+2023-05-07T01:46:06.264147+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/util/compat.py", line 249, in reraise
+2023-05-07T01:46:06.264148+00:00 app[web.1]: raise value
+2023-05-07T01:46:06.264148+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 1190, in _do_get
+2023-05-07T01:46:06.264148+00:00 app[web.1]: return self._create_connection()
+2023-05-07T01:46:06.264148+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 347, in _create_connection
+2023-05-07T01:46:06.264148+00:00 app[web.1]: return _ConnectionRecord(self)
+2023-05-07T01:46:06.264148+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 474, in __init__
+2023-05-07T01:46:06.264149+00:00 app[web.1]: self.__connect(first_connect_check=True)
+2023-05-07T01:46:06.264149+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/pool.py", line 671, in __connect
+2023-05-07T01:46:06.264149+00:00 app[web.1]: connection = pool._invoke_creator(self)
+2023-05-07T01:46:06.264149+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/strategies.py", line 106, in connect
+2023-05-07T01:46:06.264149+00:00 app[web.1]: return dialect.connect(*cargs, **cparams)
+2023-05-07T01:46:06.264158+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/sqlalchemy/engine/default.py", line 412, in connect
+2023-05-07T01:46:06.264159+00:00 app[web.1]: return self.dbapi.connect(*cargs, **cparams)
+2023-05-07T01:46:06.264159+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/psycopg2/__init__.py", line 122, in connect
+2023-05-07T01:46:06.264159+00:00 app[web.1]: conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+2023-05-07T01:46:06.264159+00:00 app[web.1]: sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+2023-05-07T01:46:06.264160+00:00 app[web.1]: Is the server running locally and accepting connections on that socket?
+2023-05-07T01:46:06.264160+00:00 app[web.1]: (Background on this error at: http://sqlalche.me/e/e3q8)
+2023-05-07T01:46:06.264247+00:00 app[web.1]: [2023-05-07 01:46:06 +0000] [8] [INFO] Worker exiting (pid: 8)
+2023-05-07T01:46:06.308073+00:00 app[web.1]: Traceback (most recent call last):
+2023-05-07T01:46:06.308079+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 209, in run
+2023-05-07T01:46:06.308244+00:00 app[web.1]: self.sleep()
+2023-05-07T01:46:06.308245+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 357, in sleep
+2023-05-07T01:46:06.308347+00:00 app[web.1]: ready = select.select([self.PIPE[0]], [], [], 1.0)
+2023-05-07T01:46:06.308348+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+2023-05-07T01:46:06.308401+00:00 app[web.1]: self.reap_workers()
+2023-05-07T01:46:06.308403+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 525, in reap_workers
+2023-05-07T01:46:06.308492+00:00 app[web.1]: raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+2023-05-07T01:46:06.308522+00:00 app[web.1]: gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2023-05-07T01:46:06.308530+00:00 app[web.1]: 
+2023-05-07T01:46:06.308530+00:00 app[web.1]: During handling of the above exception, another exception occurred:
+2023-05-07T01:46:06.308530+00:00 app[web.1]: 
+2023-05-07T01:46:06.308531+00:00 app[web.1]: Traceback (most recent call last):
+2023-05-07T01:46:06.308540+00:00 app[web.1]: File "/app/.heroku/python/bin/gunicorn", line 8, in <module>
+2023-05-07T01:46:06.308579+00:00 app[web.1]: sys.exit(run())
+2023-05-07T01:46:06.308581+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/wsgiapp.py", line 67, in run
+2023-05-07T01:46:06.308616+00:00 app[web.1]: WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
+2023-05-07T01:46:06.308617+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 231, in run
+2023-05-07T01:46:06.308664+00:00 app[web.1]: super().run()
+2023-05-07T01:46:06.308664+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/app/base.py", line 72, in run
+2023-05-07T01:46:06.308694+00:00 app[web.1]: Arbiter(self).run()
+2023-05-07T01:46:06.308694+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 229, in run
+2023-05-07T01:46:06.308734+00:00 app[web.1]: self.halt(reason=inst.reason, exit_status=inst.exit_status)
+2023-05-07T01:46:06.308735+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 342, in halt
+2023-05-07T01:46:06.308785+00:00 app[web.1]: self.stop()
+2023-05-07T01:46:06.308787+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 393, in stop
+2023-05-07T01:46:06.308839+00:00 app[web.1]: time.sleep(0.1)
+2023-05-07T01:46:06.308840+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+2023-05-07T01:46:06.308887+00:00 app[web.1]: self.reap_workers()
+2023-05-07T01:46:06.308895+00:00 app[web.1]: File "/app/.heroku/python/lib/python3.9/site-packages/gunicorn/arbiter.py", line 525, in reap_workers
+2023-05-07T01:46:06.308967+00:00 app[web.1]: raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+2023-05-07T01:46:06.308985+00:00 app[web.1]: gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+2023-05-07T01:46:06.469460+00:00 heroku[web.1]: Process exited with status 1
+2023-05-07T01:46:06.509376+00:00 heroku[web.1]: State changed from up to crashed
+2023-05-07T01:48:08.199090+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=david-auth-demo.herokuapp.com request_id=1325ecdd-abea-444f-8c30-94f134a2cdee fwd="23.118.209.15" dyno= connect= service= status=503 bytes= protocol=https
+2023-05-07T01:48:22.384859+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=david-auth-demo.herokuapp.com request_id=0f1d2789-f640-488d-b700-f63b58a4cf0f fwd="23.118.209.15" dyno= connect= service= status=503 bytes= protocol=https
+^C^C
+(venv) windie@Davids-MBP heroku % heroku addons
+ ›   Warning: heroku update available from 7.68.2 to 8.1.3.
+No add-ons for app david-auth-demo.
+(venv) windie@Davids-MBP heroku % brew upgrade heroku
+==> Downloading https://formulae.brew.sh/api/formula.jws.json
+##################################################################################################### 100.0%
+==> Downloading https://formulae.brew.sh/api/cask.jws.json
+##################################################################################################### 100.0%
+Warning: heroku/brew/heroku 7.68.2 already installed
+(venv) windie@Davids-MBP heroku % 

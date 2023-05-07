@@ -11,12 +11,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'abc123'
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
-import os
-import psycopg2
 
-DATABASE_URL = os.environ['DATABASE_URL']
-
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 connect_db(app)
 db.create_all()
